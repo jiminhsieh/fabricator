@@ -4,7 +4,7 @@ scalaVersion := "2.12.10"
 
 crossScalaVersions := Seq("2.11.12", "2.12.10")
 
-scalacOptions += "-target:jvm-1.7"
+scalacOptions += "-target:jvm-1.8"
 
 name := "fabricator"
 
@@ -54,16 +54,8 @@ coverageMinimum := 70
 coverageFailOnMinimum := true
 
 coverageHighlighting := {
-  if (scalaBinaryVersion.value == "2.11") true else false
+  if (scalaBinaryVersion.value == scalaVersion.value.split("\\.").take(2).mkString(".")) true else false
 }
-
-ivyScala := ivyScala.value map { _.copy(overrideScalaVersion = true) }
-
-Seq(bintrayPublishSettings:_*)
-
-bintray.Keys.repository in bintray.Keys.bintray := "Fabricator"
-
-bintray.Keys.bintrayOrganization in bintray.Keys.bintray := None
 
 resolvers += "Typesafe Simple Repository" at "http://repo.typesafe.com/typesafe/simple/maven-releases/"
 
